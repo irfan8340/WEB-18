@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+        }
+        nav{
+            padding: 15px;
+            background-color: navy;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        h1{
+            font-size: 35px;
+        }
+        a{
+            text-decoration: none;
+            color: white;
+        }
+        #form{
+            width: 80%;
+            margin: 50px auto;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <h1> <a href="backend.html" >Backend</a> </h1>
+        <h1> <a href="frontend.html" >Frontend</a> </h1>
+    </nav>
+
+    <form action="" id="form">
+        <input type="text" placeholder="Enter Name" id="name">
+        <br>
+        <input type="text" name="" id="img" placeholder="Paste imageURL">
+        <br>
+        <input type="text" name="" id="logo" placeholder="Paste logoURL">
+        <br>
+        <input type="text" name="" id="role" placeholder="Enter role">
+        <br>
+        <input type="submit" value="submit">
+    </form>
+</body>
+</html>
+
+<script>
+    document.querySelector("#form").addEventListener("submit", storeLocal)
+
+    var investorArr = JSON.parse(localStorage.getItem("investorInfo")) || [];
+    // if(JSON.parse(localStorage.getItem("investorInfo")) == null)
+    // {
+    //     investorArr = []
+    // }
+    // else{
+    //     JSON.parse(localStorage.getItem("investorInfo"))
+    // }
+    function storeLocal(){
+        event.preventDefault()
+
+        var investorData = {
+            investorName : form.name.value,
+            investorImg : form.img.value,
+            investorLogo : form.logo.value,
+            investorEmail : form.role.value
+        };
+
+        investorArr.push(investorData);
+        localStorage.setItem("investorInfo", JSON.stringify(investorArr))
+    }
+    
+</script>
