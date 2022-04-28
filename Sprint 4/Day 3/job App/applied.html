@@ -22,6 +22,25 @@
     <div><a href="bookmark.html">Bookmarks</a></div>
   </div>
 
+  <select name="" id="sortNames">
+    <option value="">Sort by name</option>
+    <option value="aso">Ascending</option>
+    <option value="dso">Descending</option>
+  </select>
+
+  <select name="" id="sortSalary">
+    <option value="">Sort by salary</option>
+    <option value="htl">High to low</option>
+    <option value="lth">Low to high</option>
+  </select>
+
+  <select name="" id="sortRole">
+    <option value="">Sort by role</option>
+    <option value="FSD">FSD</option>
+    <option value="Frontend">Frontend</option>
+    <option value="Backend">Backend</option>
+  </select>
+
   <main>
     <table>
       <thead>
@@ -43,10 +62,85 @@
 
   var jobArr = JSON.parse(localStorage.getItem("jobList"))
   displayData(jobArr)
+
+  document.querySelector("#sortNames").addEventListener("change", sortName)
+  document.querySelector("#sortSalary").addEventListener("change", sortSalary)
+  document.querySelector("#sortRole").addEventListener("change", sortRole)
+
+  function sortRole(){
+    var selected = document.querySelector("#sortRole").value
+    var filteredList = jobArr.filter(function(elem){
+      return elem.role == selected;
+    })
+    displayData(filteredList);
+  }
+
+  function sortSalary(){
+    var selected = document.querySelector("#sortSalary").value
+
+    if(selected == "htl"){
+      jobArr.sort(function(a, b){
+        
+        return b.salary - a.salary;
+      })
+      displayData(jobArr)
+    }
+    
+    if(selected == "lth"){
+      jobArr.sort(function(a, b){
+
+        return a.salary - b.salary;
+      })
+      displayData(jobArr)
+    }
+  }
+
+  function sortName() {
+    var selected = document.querySelector("#sortNames").value
+    console.log(selected)
+
+    if (selected == "") {
+      displayData(jobArr);
+    }
+
+    if (selected == "aso") {
+      jobArr.sort(function (a, b) {
+        var x = a.name.toUpperCase();
+        var y = b.name.toUpperCase();
+        if (x > y) {
+          return 1;
+        }
+        if (x < y) {
+          return -1;
+        }
+        return 0;
+      })
+      console.log(jobArr)
+      displayData(jobArr);
+    }
+
+    if (selected == "dso") {
+      jobArr.sort(function (a, b) {
+        var x = a.name.toUpperCase();
+        var y = b.name.toUpperCase();
+        if (x > y) {
+          return -1;
+        }
+        if (x < y) {
+          return 1;
+        }
+        return 0;
+      })
+      console.log(jobArr)
+      displayData(jobArr)
+    }
+  }
+
   var bookMarkArr = JSON.parse(localStorage.getItem("bookMarks")) || [];
 
   function displayData(data) {
-    jobArr.forEach(function (elem) {
+    document.querySelector("tbody").innerHTML = "";
+    data.forEach(function (elem) {
       var tr = document.createElement("tr")
 
       var td1 = document.createElement("td")
@@ -64,7 +158,7 @@
       var td5 = document.createElement("td")
       td5.innerText = "Bookmark"
       td5.setAttribute("class", "bookmark")
-      td5.addEventListener("click", function(){
+      td5.addEventListener("click", function () {
         bookMark(elem)
       })
 
@@ -73,7 +167,7 @@
     })
   }
 
-  function bookMark(elem){
+  function bookMark (elem) {
     // console.log(elem)
     bookMarkArr.push(elem)
     localStorage.setItem("bookMarks", JSON.stringify(bookMarkArr))
