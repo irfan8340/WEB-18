@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and SignUp</title>
+    <style>
+        form {
+            width: 20%;
+            display: flex;
+            flex-direction: column;
+            margin: 50px auto;
+        }
+
+        input {
+            margin: 10px 0px;
+        }
+
+        p {
+            text-align: center;
+            margin: 0px 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="" id="form">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password">
+        <input type="submit" value="LogIN" id="SignUp">
+    </form>
+</body>
+
+</html>
+
+<script>
+    var userArr = JSON.parse(localStorage.getItem("userInfo"))
+
+    document.querySelector("#form").addEventListener("submit", LogIN)
+
+    function LogIN() {
+
+        var loginData = {
+
+            email: form.email.value,
+            password: form.password.value
+        };
+
+        userArr.forEach(function (elem) {
+
+            if (elem.email === loginData.email && elem.password === loginData.password) {
+                alert("Login successful");
+            }
+            else {
+                alert("Wrong email password");
+            }
+        });
+    }
+</script>

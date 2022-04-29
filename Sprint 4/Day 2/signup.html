@@ -16,11 +16,15 @@
         input{
             margin: 10px 0px;
         }
+        p{
+            text-align: center;
+            margin: 0px 0px;
+        }
     </style>
 </head>
 
 <body>
-    <form action="">
+    <form action="" id="form">
         <label for="name">Full Name</label>
         <input type="text" name="name" id="name">
         <label for="email">Email</label>
@@ -34,13 +38,21 @@
 
 <script>
 
-    var form =document.querySelector("form").addEventListener("submit", myFunction)
+    document.querySelector("#form").addEventListener("submit", myFunction)
 
-    var userArr = [];
+    var userArr = JSON.parse(localStorage.getItem("userInfo")) || [];
     function myFunction(){
         event.preventDefault()
 
-        var name = form.name.value
-        var 
+       var userData = {
+           name : form.name.value,
+           email : form.email.value,
+           password : form.password.value
+       };
+
+       userArr.push(userData)
+       localStorage.setItem("userInfo", JSON.stringify(userArr))
+    //    alert("SignUp successful")
+       window.location.href = "LogIn.html"
     }
 </script>
