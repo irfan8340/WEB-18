@@ -139,7 +139,7 @@
   var bookMarkArr = JSON.parse(localStorage.getItem("bookMarks")) || [];
 
   function displayData(data) {
-    document.querySelector("tbody").innerHTML = "";
+    document.querySelector("tbody").innerHTML = ""; //for shorting and filtering the array
     data.forEach(function (elem) {
       var tr = document.createElement("tr")
 
